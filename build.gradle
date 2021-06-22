@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.xiaozongyang'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.pulsar:pulsar-client:2.8.0'
+    implementation 'com.beust:jcommander:1.78'
+    implementation 'org.eclipse.jetty:jetty-util:9.4.39.v20210325'
+    implementation 'org.slf4j:slf4j-jdk14:1.7.25'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'io.github.xiaozongyang.pulsartests.PulsarClientTool'
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest.from jar.manifest
+    classifier = 'all'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
+}

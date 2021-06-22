@@ -1,0 +1,17 @@
+.gradle/
+build/
+target/
+Makefile
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+*.iml
+tags
+logs/
+log/
+*.pid
+nohup.out
+/src/main/filters/filter.properties
+*.bak
+dependency-reduced-pom.xml
