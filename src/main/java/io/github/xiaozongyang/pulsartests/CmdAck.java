@@ -121,7 +121,6 @@ public class CmdAck {
     }
 
     private int consume(String topic) {
-        int numMessagesConsumed = 0;
         int returnCode = 0;
 
         try {
@@ -144,10 +143,8 @@ public class CmdAck {
             LOG.error("Error while consuming messages");
             LOG.error(e.getMessage(), e);
             returnCode = -1;
-        } finally {
         }
 
         return returnCode;
-
     }
 }
